@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="hint_gray_text" type="color">#b3b3b3</item>
+    <item name="gray_text" type="color">#b3b3b3</item>
+    <item name="gray_text_not_attending" type="color">#656565</item>
+    <item name="black" type="color">#000</item>
+    <item name="white" type="color">#FFF</item>
+    <item name="gray_background_medium_alpha" type="color">#90333333</item>
+    <item name="gray_background_medium" type="color">#333</item>
+    <item name="gray_background_dark" type="color">#1e1e1e</item>
+    <item name="gray_background_dark_extra" type="color">#181818</item>
+    <item name="gray_rsvp_button" type="color">#555555</item>
+    <item name="gray_guests_pager" type="color">#484848</item>
+    <item name="gray_guests_pager_darker" type="color">#424242</item>
+    <item name="gray_rsvp_button_light" type="color">#aaaaaa</item>
+    <item name="light_blue" type="color">#26bdff</item>
+    <item name="white_text" type="color">@color/text_white_button</item>
+    <item name="grey_medium" type="color">#e0e0e0</item>
+    <item name="grey_light" type="color">#eeeeee</item>
+
+</resources>

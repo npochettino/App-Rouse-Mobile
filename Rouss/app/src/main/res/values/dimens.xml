@@ -1,0 +1,14 @@
+<resources>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="navigation_drawer_width">280dp</dimen>
+
+    <!-- TEXT SIZES -->
+    <dimen name="text_size_small_content">12sp</dimen>
+    <dimen name="text_size_content">14sp</dimen>
+    <dimen name="text_size_big_content">16sp</dimen>
+    <dimen name="text_size_title">22sp</dimen>
+    <dimen name="text_size_subtitle">18sp</dimen>
+
+</resources>

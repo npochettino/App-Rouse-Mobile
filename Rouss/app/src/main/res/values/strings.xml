@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rouss</string>
+    <string name="app_name_dev">GPSRadar Staging</string>
+    <!-- URLS -->
+    <string name="url_learn_more">http://www.fashiongps.com/services/radar/</string>
+    <string name="url_privacy_policy">http://radar.staging.fashiongps.com/info/privacy/</string>
+    <string name="url_term_services">http://radar.fashiongps.com/info/terms/business/</string>
+    <string name="url_about_radar">http://www.fashiongps.com/radar</string>
+    <string name="url_about_fgps">http://www.fashiongps.com</string>
+
+    <!-- WALKTROUGH -->
+    <string name="log_in_underlined"><u>Log in</u></string>
+    <string name="learn_more_underlined"><u>Learn more</u></string>
+
+    <!-- SECTIONS -->
+    <string name="collection">Collections</string>
+    <string name="favorites">Favorites</string>
+    <string name="request_queue">Request Queue</string>
+
+    <!-- LOGIN -->
+    <string name="email_hint">Email *</string>
+    <string name="password_hint">Password *</string>
+    <string name="forgot_password">Olvide mi contraseña?</string>
+    <string name="done">Ingresar</string>
+    <string name="skip">Skip</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="dni">DNI</string>
+    <string name="telefono">Telefono</string>
+
+
+    <!-- REQUEST_ACOUTN -->
+    <string name="first_name">First Name *</string>
+    <string name="last_name">Last Name *</string>
+    <string name="submit">Submit</string>
+    <string name="term_service">By clicking Submit, you agree to the terms of service and privacy policy.</string>
+    <string name="sector">Sector *</string>
+    <string name="region">Region *</string>
+    <string name="job_role">Job Role *</string>
+    <string name="job_title">Job Title *</string>
+    <string name="mobile_phone">Mobile Phone</string>
+    <string name="sample_request_type">Sample Request Type *</string>
+    <string name="freelancer">Freelancer</string>
+    <string name="affiliation_company_mand">Affiliation Company *</string>
+    <string name="affiliation_company">Affiliation Company</string>
+    <string name="publications_represent">Publications you Represent</string>
+    <string name="continue_button">Continue</string>
+    <string name="thank_you">Thank You</string>
+    <string name="your_Account_request_has_been">Your account request has been submitted and is awaiting approval. Once your account has been processed you will receive a confirmation email.\n\nThank you for your interest in GPS Radar!</string>
+
+    <!-- EVENTS -->
+    <string name="all_events">All Events</string>
+    <string name="invited_events">Invited Events</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="past">Past</string>
+    <string name="attending">Attending</string>
+    <string name="not_attending">Not Attending</string>
+    <string name="pending_rsvp">RSVP Pending</string>
+    <string name="priority_standing">Priority Standing</string>
+    <string name="standing">Standing</string>
+    <string name="rsvp_is_closed">RSVP is closed</string>
+    <string name="event_images">Event Images</string>
+    <string name="barcodes_and_seats">Barcodes &amp; Seat Assignments</string>
+    <string name="add_guest">Add Guest</string>
+    <string name="updating_rsvp">Updating your RSVP &#8230;</string>
+    <string name="not_assigned">Seat: No seat assigned</string>
+    <string name="seat_standing">Seat: Standing</string>
+    <string name="request_an_invitation">Request an Invitation</string>
+
+    <!-- SEARCH -->
+    <string name="cancel">Cancel</string>
+    <string name="search_events">Search All Events</string>
+    <string name="no_result">No results</string>
+    <string name="search_collections">Search Collections</string>
+    <string name="search_filter">Search All Filters</string>
+    <string name="reload">Reload</string>
+    <string name="clear_all">Clear All</string>
+
+    <!-- PROFILE SETTINGS -->
+    <string name="profile_title">My Account</string>
+    <string name="push_setting">Push Settings</string>
+    <string name="time_zone">Time zone</string>
+    <string name="about_radar">About Radar</string>
+    <string name="about_gps">About Fashion GPS</string>
+    <string name="title_about_gps">About Fashion GPS</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="terms">Terms</string>
+    <string name="version">Version</string>
+    <string name="logout">Logout</string>
+
+    <!-- TIME ZONE SETTING -->
+    <string name="event_time_zone">Use Event Time Zone</string>
+    <string name="system_time_zone">Use System Time Zone</string>
+    <string name="select">Select</string>
+
+    <!-- PUSH SETTINGS -->
+    <string name="invitations">Invitations</string>
+    <string name="seats_assignments">Seats Assignments</string>
+    <string name="galleries">Galleries</string>
+    <string name="video_posted">Video Posted</string>
+    <string name="rsvp_updates">RSVP Updates</string>
+    <string name="guest_updates">Guest Updates</string>
+    <string name="your_connections">YOUR CONNECTIONS</string>
+
+    <!-- Basic Buttons -->
+    <string name="accept_button">Accept</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="delete_button">Delete</string>
+    <string name="add_button">Add</string>
+
+    <!-- FILTERS DRAWER -->
+    <string name="image_type">Image Type</string>
+    <string name="image_description">Image Description</string>
+    <string name="misc_filter">Misc Filters</string>
+    <string name="requesting_enable">Requesting Enabled</string>
+    <string name="agency">Agency</string>
+    <string name="agency_pr">Agency:</string>
+    <string name="contacts">Contacts:</string>
+    <string name="city">City:</string>
+    <string name="email">Email:</string>
+    <string name="telephone">Telephone:</string>
+    <string name="group">Groups</string>
+    <string name="type_filter">Type</string>
+    <string name="color">Color</string>
+    <string name="price">Price</string>
+    <string name="Gender">Gender</string>
+    <string name="fabric">Fabric</string>
+    <string name="showroom_location">Showroom Location</string>
+    <string name="showroom">Showroom</string>
+    <string name="designers">Designers</string>
+    <string name="subcollections">SubCollection</string>
+    <string name="seasson">Season</string>
+    <string name="my_notes">My Notes</string>
+    <string name="queued">Queued</string>
+
+    <!-- Detail GalleryItem -->
+    <string name="notes">Notes</string>
+    <string name="save">Save</string>
+    <string name="detail">Detail</string>
+    <string name="prContact">PR Contact</string>
+    <string name="patterns">Patterns</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="look">Look </string>
+    <string name="remove_from_queue">Remove from Request Queue?</string>
+
+    <!-- Buttons Dialog -->
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="ok">OK</string>
+
+    <!-- Request Detail -->
+    <string name="required_info">REQUIRED INFO</string>
+    <string name="company">Company *</string>
+    <string name="full_name">Full Name *</string>
+    <string name="contact_email">Contact Email *</string>
+    <string name="phone2">Phone *</string>
+    <string name="return_date">Return Date</string>
+    <string name="start_shoot">Start Shoot Date</string>
+    <string name="request_detail">Request Detail</string>
+    <string name="additional_info">ADDITIONAL INFO</string>
+    <string name="address_1">Address 1 *</string>
+    <string name="address_2">Address 2</string>
+    <string name="city_">City *</string>
+    <string name="state">State *</string>
+    <string name="zip_code">Zip Code *</string>
+    <string name="country">Country *</string>
+    <string name="pick_up_date">Pick Up Date</string>
+    <string name="run_date">Run-through Date</string>
+    <string name="end_date">End Shoot Date</string>
+    <string name="issue">Issue</string>
+    <string name="editor">Editor/Stylist</string>
+    <string name="theme">Theme</string>
+    <string name="required">Required</string>
+    <string name="empty_request_fields">Please fill out all the required fields.</string>
+
+    <!-- SDKS -->
+    <string name="facebook_app_id">149625828464098</string>
+
+</resources>
