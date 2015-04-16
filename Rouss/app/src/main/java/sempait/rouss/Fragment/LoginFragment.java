@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
+import sempait.rouss.Activities.LoginActivity;
 import sempait.rouss.Activities.MainActivity;
 import sempait.rouss.Base.BaseActivity;
 import sempait.rouss.Models.User;
@@ -132,11 +133,11 @@ public class LoginFragment extends BaseFragment {
         };
 
 
-//        mLoginTask.mEmail = mEmailEditText.getText().toString();
-//        mLoginTask.mPassword = mPasswordEditText.getText().toString();
+        mLoginTask.mEmail = mEmailEditText.getText().toString();
+        mLoginTask.mPassword = mPasswordEditText.getText().toString();
 
-        mLoginTask.mEmail = "admin@sempait.com.ar";
-        mLoginTask.mPassword = "admin";
+//        mLoginTask.mEmail = "admin@sempait.com.ar";
+//        mLoginTask.mPassword = "admin";
 
         mLoginTask.execute();
 
@@ -154,6 +155,8 @@ public class LoginFragment extends BaseFragment {
                 super.onPostExecute(result);
 
                 mContext.startActivity(new Intent(mContext, MainActivity.class));
+
+                ((LoginActivity) mContext).finish();
 
             }
         };
