@@ -96,6 +96,19 @@ public class BaseActivity extends FragmentActivity {
         transaction.commit();
     }
 
+    public void replaceInnerFragmentWhitFLip(Fragment fragment, Boolean addToBackstack) {
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.flip_in, R.anim.flip_out, R.anim.flip_in, R.anim.flip_out);
+        transaction.replace(R.id.container, fragment);
+
+        if (addToBackstack)
+            transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
+
 
     public void replaceInnerFragmentFromBotton(Fragment fragment, Boolean addToBackstack) {
 

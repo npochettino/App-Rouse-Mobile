@@ -2,6 +2,7 @@ package sempait.rouss.Drawer;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import sempait.rouss.Activities.LoginActivity;
 import sempait.rouss.Base.BaseActivity;
+import sempait.rouss.Fragment.CreateAcountFragment;
 import sempait.rouss.Fragment.RouletteFragment;
 import sempait.rouss.R;
 import sempait.rouss.Services.volley.Manager.SorteoTask;
@@ -33,6 +36,8 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
     private NavigationMenuItem mAcercaDeItem;
     private Button mLogout;
     private SorteoTask mSorteTask;
+    private Switch mSwitchSonido;
+    private TextView mUserNameTextView;
 
 
     public Section mSelectedSection = Section.JUGAR;
@@ -52,11 +57,21 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
         mMisPremiosEditText = (NavigationMenuItem) mView.findViewById(R.id.all_events_item);
         mAcercaDeItem = (NavigationMenuItem) mView.findViewById(R.id.acerca_de_item);
         mLogout = (Button) mView.findViewById(R.id.btnLogout);
+        mSwitchSonido = (Switch) mView.findViewById(R.id.switchSonido);
+        mUserNameTextView = (TextView) mView.findViewById(R.id.user_name);
+
+        if (ConfigurationClass.getSonidoState(mContext))
+            mSwitchSonido.setChecked(true);
+        else
+            mSwitchSonido.setChecked(false);
+
+
         if (ConfigurationClass.getUserName(mContext) != null) {
             mLogout.setVisibility(View.VISIBLE);
             ((TextView) mView.findViewById(R.id.user_name)).setText(ConfigurationClass.getUserName(mContext));
         } else
             mLogout.setVisibility(View.GONE);
+
 
         return mView;
     }
@@ -94,11 +109,42 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
         mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConfigurationClass.setUserName(mContext, null);
+                //ConfigurationClass.setUserName(mContext, null);
+
+                SharedPreferences prefs = ConfigurationClass.sharedPref(mContext);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.clear();
+                editor.commit();
+
+
                 mContext.startActivity(new Intent(mContext, LoginActivity.class));
+
 
                 getActivity().finish();
 
+            }
+        });
+
+
+        mSwitchSonido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (ConfigurationClass.getSonidoState(mContext))
+
+                    ConfigurationClass.setStateSonido(false, mContext);
+                else
+                    ConfigurationClass.setStateSonido(true, mContext);
+
+
+            }
+        });
+
+        mUserNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((BaseActivity) mContext).replaceInnerFragment(CreateAcountFragment.newInstance(), true);
             }
         });
 

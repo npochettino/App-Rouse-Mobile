@@ -150,7 +150,8 @@ public class RouletteFragment extends BaseFragment {
     }
 
     private void setAnimation() {
-        setSound();
+        if (ConfigurationClass.getSonidoState(mContext))
+            setSound();
         startAnimation();
 
 

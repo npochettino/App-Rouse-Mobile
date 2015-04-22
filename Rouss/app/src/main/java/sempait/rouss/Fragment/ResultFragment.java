@@ -4,6 +4,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,13 @@ public class ResultFragment extends BaseFragment {
 
         ((BaseActivity) mContext).getActionBar().setTitle("Gracias por participar");
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-        streamId = soundPool.load(mContext, R.raw.aplausos, 0);
+        if (Integer.valueOf(ConfigurationClass.getcodigoPremio(mContext)) != 4)
+            streamId = soundPool.load(mContext, R.raw.aplausos, 0);
+
+        else
+            streamId = soundPool.load(mContext, R.raw.seralaproxima, 0);
+
+
     }
 
 
@@ -51,6 +58,7 @@ public class ResultFragment extends BaseFragment {
 
         mImgResult.setImageResource(setImageResult());
 
+        if (ConfigurationClass.getSonidoState(mContext))
         setSound();
 
         executePutParticipanteService();
@@ -59,9 +67,25 @@ public class ResultFragment extends BaseFragment {
         return mView;
     }
 
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((BaseActivity)mContext).onBackPressed();
+
+            }
+        });
+    }
+
     private int setImageResult() {
 
         int mIdImage = R.drawable.seralaproxima;
+
 
         switch (Integer.valueOf(ConfigurationClass.getcodigoPremio(mContext))) {
 
@@ -121,10 +145,10 @@ public class ResultFragment extends BaseFragment {
 
 
                 soundPool.play(streamId, 1, 1, 1, 0, 1f);
-                SystemClock.sleep(3000);
+                SystemClock.sleep(4000);
                 soundPool.autoPause();
 
-//                for (float x = 0; x <= 3000; ) {
+//                for (float x = 0; x <=switch en on of android?3000; ) {
 //                    y = y - 0.1f;
 //                    soundPool.setVolume(streamId, y, y);
 //                    SystemClock.sleep(1000);

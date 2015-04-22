@@ -11,7 +11,9 @@ import android.widget.RelativeLayout;
 import sempait.rouss.Base.BaseActivity;
 import sempait.rouss.R;
 import sempait.rouss.Services.volley.Manager.CreateAcountTask;
+import sempait.rouss.Utils.ConfigurationClass;
 import sempait.rouss.Utils.DialogCatalog;
+import sempait.rouss.Utils.RoussUtils;
 
 /**
  * Created by martin on 13/04/15.
@@ -52,7 +54,19 @@ public class CreateAcountFragment extends BaseFragment {
         mBtnCrearCuenta = (RelativeLayout) mView.findViewById(R.id.btn_crear_cuenta);
         mBtnCancelar = (RelativeLayout) mView.findViewById(R.id.btn_relative_cancelar);
 
+        if(ConfigurationClass.getUserName(mContext)!=null)
+            loadDataUser();
+
+
+
         return mView;
+    }
+
+    private void loadDataUser() {
+
+
+
+
     }
 
 
@@ -76,7 +90,13 @@ public class CreateAcountFragment extends BaseFragment {
                 if (allFildCompleted()) {
 
                     if (mPasswordEditText.getText().toString().equals(mPasswordConfirmEditText.getText().toString()))
-                        executeServiceAccount();
+
+                        if (RoussUtils.validEmail(mEmailEditText.getText().toString()))
+
+                            executeServiceAccount();
+
+                        else
+                            DialogCatalog.mensajeError("Ingrese un correo válido, por favor", mContext);
 
                     else
                         DialogCatalog.mensajeError("Los campos de contraseña deben coincidir", mContext);

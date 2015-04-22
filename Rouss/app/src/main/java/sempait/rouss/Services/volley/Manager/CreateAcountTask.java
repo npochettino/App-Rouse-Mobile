@@ -82,11 +82,28 @@ public class CreateAcountTask extends AsyncTask<Void, Void, String> {
         super.onPostExecute(result);
         ((BaseActivity) mContext).dismissLoadingView();
 
-        if (result != null)
+        if (result != null) {
 
-            ((BaseActivity) mContext).onBackPressed();
 
-        else
+            switch (Integer.valueOf(result)) {
+
+
+                case 1:
+                    DialogCatalog.mensajeError("La cuenta fue creada con éxito", mContext);
+                    ((BaseActivity) mContext).onBackPressed();
+                    break;
+
+                case 2:
+                    DialogCatalog.mensajeError("El DNI fue ya está en uso", mContext);
+                    break;
+
+                case 3:
+                    DialogCatalog.mensajeError("El email ya esta en uso", mContext);
+                    break;
+
+
+            }
+        } else
 
             DialogCatalog.mensajeError("No pudo crearse la cuenta, intentelo nuevamente en unos minutos ", mContext);
 

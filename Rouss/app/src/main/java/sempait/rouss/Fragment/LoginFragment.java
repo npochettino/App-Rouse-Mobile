@@ -76,7 +76,11 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                executeLoginService();
+
+                if (allFildCompleted())
+                    executeLoginService();
+                else
+                    DialogCatalog.mensajeError("Debe completar todos los datos del formulario", mContext);
             }
         });
 
@@ -85,7 +89,7 @@ public class LoginFragment extends BaseFragment {
             public void onClick(View v) {
 
 
-                ((BaseActivity) mContext).replaceInnerFragment(CreateAcountFragment.newInstance(), true);
+                ((BaseActivity) mContext).replaceInnerFragmentWhitFLip(CreateAcountFragment.newInstance(), true);
 
 
             }
@@ -112,7 +116,7 @@ public class LoginFragment extends BaseFragment {
 
                         mUserActual = mUsers.get(0);
 
-                        ConfigurationClass.setUserName(mContext, mUserActual.getApellido() + mUserActual.getNombre());
+                        ConfigurationClass.setUserName(mContext, mUserActual.getApellido() + " " + mUserActual.getNombre());
                         ConfigurationClass.setUserCod(mContext, mUserActual.getCodigoUsuario());
 
 
@@ -136,8 +140,6 @@ public class LoginFragment extends BaseFragment {
         mLoginTask.mEmail = mEmailEditText.getText().toString();
         mLoginTask.mPassword = mPasswordEditText.getText().toString();
 
-//        mLoginTask.mEmail = "admin@sempait.com.ar";
-//        mLoginTask.mPassword = "admin";
 
         mLoginTask.execute();
 
@@ -166,7 +168,16 @@ public class LoginFragment extends BaseFragment {
     }
 
 
-    public void startActivity() {
+    private boolean allFildCompleted() {
+
+        if (mEmailEditText.getText().toString().isEmpty()
+                || mPasswordEditText.getText().toString().isEmpty()) {
+
+
+            return false;
+
+        } else
+            return true;
 
 
     }

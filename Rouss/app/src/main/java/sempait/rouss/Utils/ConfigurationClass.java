@@ -18,9 +18,10 @@ public class ConfigurationClass {
     private static final String CANTIDAD_PREMIOS_USUARIO = "cantidad_premios_usuario";
     private static final String CANTIDAD_PREMIOS_TOTALES = "cantidad_premios_totales";
     private static final String CODIGO_PREMIO = "codigo_premio";
+    private static final String SONIDO_STATE = "sonido_state";
 
 
-    private static SharedPreferences sharedPref(Context context) {
+    public static SharedPreferences sharedPref(Context context) {
         return context.getSharedPreferences(PREFS_NAME, 0);
     }
 
@@ -90,5 +91,17 @@ public class ConfigurationClass {
         return sharedPref(context).getString(CODIGO_PREMIO, null);
     }
 
+
+    public static void setStateSonido(Boolean state, Context mContext) {
+
+
+        sharedPref(mContext).edit().putBoolean(SONIDO_STATE, state).commit();
+
+
+    }
+
+    public static Boolean getSonidoState(Context context) {
+        return sharedPref(context).getBoolean(SONIDO_STATE, false);
+    }
 
 }
