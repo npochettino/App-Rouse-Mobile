@@ -25,12 +25,7 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
-        <!--<ImageView-->
-        <!--android:layout_width="40dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:padding="10dp"-->
-        <!--android:src="@drawable/config_cog" />-->
+
     </LinearLayout>
 
     <LinearLayout
@@ -56,46 +51,33 @@
         <sempait.rouss.Utils.NavigationMenuItem
             android:id="@+id/invited_events_item"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center_vertical|left"
             android:height="0dp"
             android:layout_weight="2"
             android:paddingLeft="20dp"
-
             android:text="Jugar" />
 
         <sempait.rouss.Utils.NavigationMenuItem
             android:id="@+id/all_events_item"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center_vertical|left"
-
             android:height="0dp"
             android:layout_weight="2"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:text="Mis premios" />
 
-        <sempait.rouss.Utils.NavigationMenuItem
-            android:id="@+id/acerca_de_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|left"
-
-            android:height="0dp"
-            android:layout_weight="2"
-            android:paddingLeft="20dp"
-
-            android:text="Acerca de" />
 
         <Switch
             android:id="@+id/switchSonido"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="Sonido"
             android:height="0dp"
             android:layout_marginLeft="20dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:textColor="@color/white" />
 
         <Button
@@ -106,7 +88,7 @@
             android:textAlignment="center"
             android:padding="20dp"
             android:height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:paddingTop="60dp"
             android:textColor="@color/white"
             android:layout_margin="30dp"
@@ -115,7 +97,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"></View>
+            android:layout_weight="3"></View>
 
 
     </LinearLayout>

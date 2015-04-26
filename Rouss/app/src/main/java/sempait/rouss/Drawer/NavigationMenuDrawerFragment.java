@@ -44,7 +44,7 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
 
     public static enum Section {
 
-        JUGAR, MIS_PREMIOS, ACERCA_DE
+        JUGAR, MIS_PREMIOS
     }
 
     @Override
@@ -55,7 +55,6 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
 
         mJugarEditText = (NavigationMenuItem) mView.findViewById(R.id.invited_events_item);
         mMisPremiosEditText = (NavigationMenuItem) mView.findViewById(R.id.all_events_item);
-        mAcercaDeItem = (NavigationMenuItem) mView.findViewById(R.id.acerca_de_item);
         mLogout = (Button) mView.findViewById(R.id.btnLogout);
         mSwitchSonido = (Switch) mView.findViewById(R.id.switchSonido);
         mUserNameTextView = (TextView) mView.findViewById(R.id.user_name);
@@ -95,13 +94,6 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
             @Override
             public void onClick(View v) {
                 openSection(Section.MIS_PREMIOS);
-            }
-        });
-
-        mAcercaDeItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSection(Section.ACERCA_DE);
             }
         });
 
@@ -174,15 +166,6 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
                 //fragment = EventsFragment.newInstance(EventsManager.ALL);
                 mSection = "Mis Premios";
                 break;
-//
-            case ACERCA_DE:
-//                fragment = RouletteFragment.newInstance();
-//                bundle.putString(RadarConstants.FRAGMENT_FROM, ServiceCatalog.GET_GALLERIES);
-//                mFilterDrawerFragment.collectionFragment = (CollectionsFragment) fragment;
-//                fragment.setArguments(bundle);
-                mSection = "Acerca de";
-                break;
-
             default:
                 break;
         }
@@ -209,7 +192,6 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
 
         mJugarEditText.setStatusSelected(false);
         mMisPremiosEditText.setStatusSelected(false);
-        mAcercaDeItem.setStatusSelected(false);
 
 
         switch (mSelectedSection) {
@@ -220,10 +202,6 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
 
             case MIS_PREMIOS:
                 mMisPremiosEditText.setStatusSelected(true);
-                break;
-
-            case ACERCA_DE:
-                mAcercaDeItem.setStatusSelected(true);
                 break;
 
 

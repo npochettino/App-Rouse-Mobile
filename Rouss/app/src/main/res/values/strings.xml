@@ -29,6 +29,8 @@
     <string name="apellido">Apellido</string>
     <string name="dni">DNI</string>
     <string name="telefono">Telefono</string>
+    <string name="enviar">Enviar</string>
+
 
 
     <!-- REQUEST_ACOUTN -->

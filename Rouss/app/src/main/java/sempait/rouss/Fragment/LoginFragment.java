@@ -58,7 +58,7 @@ public class LoginFragment extends BaseFragment {
         mButtonDone = (RelativeLayout) mView.findViewById(R.id.btn_done);
         mButtonForgotPass = (RelativeLayout) mView.findViewById(R.id.btn_forgot_pass);
         mButtonCrearCuenta = (RelativeLayout) mView.findViewById(R.id.btn_crear_cuenta);
-        mMainScroll = (ScrollView) mView;
+//        mMainScroll = (ScrollView) mView;
         mEmailEditText = (EditText) mView.findViewById(R.id.et_email);
         mPasswordEditText = (EditText) mView.findViewById(R.id.et_password);
         context = mContext;
@@ -96,6 +96,15 @@ public class LoginFragment extends BaseFragment {
         });
 
 
+        mButtonForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((BaseActivity) mContext).replaceInnerFragmentWhitFLip(ForgotPasswordFragemnt.newInstance(), true);
+
+            }
+        });
+
     }
 
 
@@ -108,28 +117,22 @@ public class LoginFragment extends BaseFragment {
 
                 super.onPostExecute(result);
 
-                if (result != null) {
-                    if (!result.equals("LogueoIncorrecto")) {
-
-                        List<User> mUsers = new Gson().fromJson(result.toString(), new TypeToken<List<User>>() {
-                        }.getType());
-
-                        mUserActual = mUsers.get(0);
-
-                        ConfigurationClass.setUserName(mContext, mUserActual.getApellido() + " " + mUserActual.getNombre());
-                        ConfigurationClass.setUserCod(mContext, mUserActual.getCodigoUsuario());
+                if (result != null && result.length() != 2) {
 
 
-                        executeSorteoService();
-                    } else {
+                    List<User> mUsers = new Gson().fromJson(result.toString(), new TypeToken<List<User>>() {
+                    }.getType());
 
-                        DialogCatalog.logueoIncorrecto("", mContext);
-                    }
+                    mUserActual = mUsers.get(0);
+
+                    ConfigurationClass.setUserName(mContext, mUserActual.getApellido() + " " + mUserActual.getNombre());
+                    ConfigurationClass.setUserCod(mContext, mUserActual.getCodigoUsuario());
 
 
+                    executeSorteoService();
                 } else {
-                    DialogCatalog.serverErrorDialog("", mContext);
 
+                    DialogCatalog.logueoIncorrecto("El usuario y/o contraseña son incorrectos", mContext);
                 }
 
 

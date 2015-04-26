@@ -8,6 +8,7 @@ import sempait.rouss.Models.Sorteo;
 import sempait.rouss.R;
 import sempait.rouss.Services.volley.Manager.SorteoTask;
 import sempait.rouss.Utils.ConfigurationClass;
+import sempait.rouss.Utils.DialogCatalog;
 
 /**
  * Created by martin on 19/03/15.
@@ -46,8 +47,12 @@ public class SplashActivity extends BaseInnerActivity {
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
 
-                SplashActivity.this.startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
+                if (result != null) {
+                    SplashActivity.this.startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
+                } else
+                    DialogCatalog.mensajeError("Hubo un problema, intentelo nuevamente en unos minutos", SplashActivity.this);
+
             }
         };
 
