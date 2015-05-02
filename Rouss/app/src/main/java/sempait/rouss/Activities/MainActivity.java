@@ -1,5 +1,7 @@
 package sempait.rouss.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -98,5 +100,39 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+
+        new AlertDialog.Builder(this).setMessage("Desea salir de la aplicación?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int id) {
+
+
+                                finish();
+
+                            }
+
+                        }
+
+
+                ).
+
+                setNegativeButton("No",
+
+                        new DialogInterface.OnClickListener()
+
+                        {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }
+
+                ).
+
+                show();
+    }
 }

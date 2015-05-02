@@ -10,6 +10,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import sempait.rouss.Base.BaseActivity;
+import sempait.rouss.Utils.ConfigurationClass;
 import sempait.rouss.Utils.DialogCatalog;
 
 /**
@@ -89,8 +90,12 @@ public class CreateAcountTask extends AsyncTask<Void, Void, String> {
 
 
                 case 1:
-                    DialogCatalog.mensajeError("La cuenta fue creada con éxito", mContext);
-                    ((BaseActivity) mContext).onBackPressed();
+                    if (ConfigurationClass.getUserNameCompleted(mContext) != null)
+                        DialogCatalog.mensajeError("Los datos fueron modificados con éxito", mContext);
+                    else {
+                        DialogCatalog.mensajeError("La cuenta fue creada con éxito", mContext);
+                        ((BaseActivity) mContext).onBackPressed();
+                    }
                     break;
 
                 case 2:

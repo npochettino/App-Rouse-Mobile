@@ -89,7 +89,7 @@ public class LoginFragment extends BaseFragment {
             public void onClick(View v) {
 
 
-                ((BaseActivity) mContext).replaceInnerFragmentWhitFLip(CreateAcountFragment.newInstance(), true);
+                ((BaseActivity) mContext).replaceInnerFragmentWhitFLip(CreateAcountFragment.newInstance(null), true);
 
 
             }
@@ -125,8 +125,14 @@ public class LoginFragment extends BaseFragment {
 
                     mUserActual = mUsers.get(0);
 
-                    ConfigurationClass.setUserName(mContext, mUserActual.getApellido() + " " + mUserActual.getNombre());
+                    ConfigurationClass.setUserNameCompleted(mContext, mUserActual.getApellido() + " " + mUserActual.getNombre());
+                    ConfigurationClass.setFirstNameUser(mContext, mUserActual.getNombre());
+                    ConfigurationClass.setUserLastNameUser(mContext, mUserActual.getApellido());
                     ConfigurationClass.setUserCod(mContext, mUserActual.getCodigoUsuario());
+                    ConfigurationClass.setEmailUser(mContext, mUserActual.getMail());
+                    ConfigurationClass.setTelUser(mContext, mUserActual.getTelefono());
+                    ConfigurationClass.setDNIUser(mContext, mUserActual.getDni());
+                    ConfigurationClass.setPasswodUser(mContext, mUserActual.getContraseña());
 
 
                     executeSorteoService();

@@ -44,7 +44,7 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
 
     public static enum Section {
 
-        JUGAR, MIS_PREMIOS
+        JUGAR, MI_PERFIL
     }
 
     @Override
@@ -65,14 +65,19 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
             mSwitchSonido.setChecked(false);
 
 
-        if (ConfigurationClass.getUserName(mContext) != null) {
-            mLogout.setVisibility(View.VISIBLE);
-            ((TextView) mView.findViewById(R.id.user_name)).setText(ConfigurationClass.getUserName(mContext));
-        } else
-            mLogout.setVisibility(View.GONE);
+        setNameUser();
 
 
         return mView;
+    }
+
+    public void setNameUser() {
+
+        if (ConfigurationClass.getUserNameCompleted(mContext) != null) {
+            mLogout.setVisibility(View.VISIBLE);
+            ((TextView) mView.findViewById(R.id.user_name)).setText(ConfigurationClass.getUserNameCompleted(mContext));
+        } else
+            mLogout.setVisibility(View.GONE);
     }
 
     @Override
@@ -93,7 +98,7 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
         mMisPremiosEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSection(Section.MIS_PREMIOS);
+                openSection(Section.MI_PERFIL);
             }
         });
 
@@ -101,7 +106,7 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
         mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ConfigurationClass.setUserName(mContext, null);
+                //ConfigurationClass.setUserNameCompleted(mContext, null);
 
                 SharedPreferences prefs = ConfigurationClass.sharedPref(mContext);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -136,7 +141,7 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
             @Override
             public void onClick(View v) {
 
-                ((BaseActivity) mContext).replaceInnerFragment(CreateAcountFragment.newInstance(), true);
+                openSection(Section.MI_PERFIL);
             }
         });
 
@@ -159,19 +164,20 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
 
                 fragment = RouletteFragment.newInstance();
                 mSection = "Ruleta";
-
+                ((BaseActivity) mContext).replaceInnerFragmentWhitFLip(fragment, false);
                 break;
 
-            case MIS_PREMIOS:
-                //fragment = EventsFragment.newInstance(EventsManager.ALL);
-                mSection = "Mis Premios";
+            case MI_PERFIL:
+                fragment = CreateAcountFragment.newInstance(this);
+                mSection = "Mi perfil";
+
+
+                ((BaseActivity) mContext).replaceInnerFragment(fragment, false);
                 break;
             default:
                 break;
         }
 
-        if (fragment != null)
-            replaceFragmentSection(fragment);
 
         ((BaseActivity) mContext).getActionBar().setDisplayHomeAsUpEnabled(true);
         ((BaseActivity) mContext).getActionBar().setHomeButtonEnabled(true);
@@ -200,7 +206,7 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
                 mJugarEditText.setStatusSelected(true);
                 break;
 
-            case MIS_PREMIOS:
+            case MI_PERFIL:
                 mMisPremiosEditText.setStatusSelected(true);
                 break;
 

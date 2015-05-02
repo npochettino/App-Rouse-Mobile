@@ -2,9 +2,12 @@ package sempait.rouss.Fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.v4.app.Fragment;
 
 import sempait.rouss.Base.BaseActivity;
+import sempait.rouss.R;
 
 /**
  * Created by martin on 19/03/15.
@@ -14,10 +17,15 @@ public class BaseFragment extends Fragment {
     public Context mContext;
     public BaseActivity mBaseActivity;
 
+
+
     @Override
+
     public void onAttach(Activity activity) {
         mContext = activity;
         mBaseActivity = (BaseActivity) activity;
+
+
         super.onAttach(activity);
     }
 

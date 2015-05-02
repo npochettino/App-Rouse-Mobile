@@ -1,5 +1,7 @@
 package sempait.rouss.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -7,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import sempait.rouss.Base.BaseActivity;
+import sempait.rouss.Drawer.NavigationMenuDrawerFragment;
 import sempait.rouss.R;
 import sempait.rouss.Services.volley.Manager.CreateAcountTask;
 import sempait.rouss.Utils.ConfigurationClass;
@@ -28,14 +32,26 @@ public class CreateAcountFragment extends BaseFragment {
     private EditText mPasswordConfirmEditText;
     private EditText mTelefonoEditText;
     private EditText mDniEditText;
-    private RelativeLayout mBtnCrearCuenta;
+    private TextView mBtnCrearCuenta;
     private RelativeLayout mBtnCancelar;
     private CreateAcountTask mCreateTask;
+    private NavigationMenuDrawerFragment mInstace;
 
 
-    public static CreateAcountFragment newInstance() {
+    public static CreateAcountFragment newInstance(NavigationMenuDrawerFragment mInstanceDrawer) {
 
-        return new CreateAcountFragment();
+        return new CreateAcountFragment(mInstanceDrawer);
+    }
+
+
+    public CreateAcountFragment() {
+
+
+    }
+
+    public CreateAcountFragment(NavigationMenuDrawerFragment mInstanceDrawer) {
+
+        mInstace = mInstanceDrawer;
     }
 
     @Override
@@ -51,12 +67,13 @@ public class CreateAcountFragment extends BaseFragment {
         mPasswordConfirmEditText = (EditText) mView.findViewById(R.id.et_password_confirm);
         mTelefonoEditText = (EditText) mView.findViewById(R.id.et_telefono);
         mDniEditText = (EditText) mView.findViewById(R.id.et_dni);
-        mBtnCrearCuenta = (RelativeLayout) mView.findViewById(R.id.btn_crear_cuenta);
+        mBtnCrearCuenta = (TextView) mView.findViewById(R.id.btn_crear_cuenta);
         mBtnCancelar = (RelativeLayout) mView.findViewById(R.id.btn_relative_cancelar);
 
-        if(ConfigurationClass.getUserName(mContext)!=null)
+        if (ConfigurationClass.getUserNameCompleted(mContext) != null) {
             loadDataUser();
-
+            mBtnCrearCuenta.setText("Modificar");
+        }
 
 
         return mView;
@@ -64,7 +81,13 @@ public class CreateAcountFragment extends BaseFragment {
 
     private void loadDataUser() {
 
-
+        mNombreEditText.setText(ConfigurationClass.getUserFirstNameUser(mContext));
+        mApellidoEditText.setText(ConfigurationClass.getUserLastNameUserUser(mContext));
+        mEmailEditText.setText(ConfigurationClass.getEmalUser(mContext));
+        mPasswordEditText.setText(ConfigurationClass.getPasswordUser(mContext));
+        mPasswordConfirmEditText.setText(ConfigurationClass.getPasswordUser(mContext));
+        mTelefonoEditText.setText(ConfigurationClass.getTelUser(mContext));
+        mDniEditText.setText(ConfigurationClass.getDNIUser(mContext));
 
 
     }
@@ -112,9 +135,34 @@ public class CreateAcountFragment extends BaseFragment {
     }
 
     private void executeServiceAccount() {
-        mCreateTask = new CreateAcountTask(mContext);
+        mCreateTask = new CreateAcountTask(mContext) {
 
-        mCreateTask.mCodigoUsuario = "0";
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+                ConfigurationClass.setUserNameCompleted(mContext, mApellidoEditText.getText() + " " + mNombreEditText.getText());
+                ConfigurationClass.setFirstNameUser(mContext, mNombreEditText.getText().toString());
+                ConfigurationClass.setUserLastNameUser(mContext, mApellidoEditText.getText().toString());
+                ConfigurationClass.setEmailUser(mContext, mEmailEditText.getText().toString());
+                ConfigurationClass.setTelUser(mContext, mTelefonoEditText.getText().toString());
+                ConfigurationClass.setDNIUser(mContext, mDniEditText.getText().toString());
+                ConfigurationClass.setPasswodUser(mContext, mPasswordEditText.getText().toString());
+
+                if (mInstace != null)
+                    mInstace.setNameUser();
+
+
+            }
+
+
+        };
+
+        if (ConfigurationClass.getUserNameCompleted(mContext) != null)
+            mCreateTask.mCodigoUsuario = ConfigurationClass.getUserCod(mContext);
+        else
+            mCreateTask.mCodigoUsuario = "0";
         mCreateTask.mApellido = mApellidoEditText.getText().toString();
         mCreateTask.mNombre = mNombreEditText.getText().toString();
         mCreateTask.mEmail = mEmailEditText.getText().toString();
@@ -144,5 +192,21 @@ public class CreateAcountFragment extends BaseFragment {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+
+//        if (((BaseActivity) mContext).getSupportFragmentManager().getBackStackEntryCount() == 0)
+//            DialogCatalog.mensajeError("Desea salir de la aplicación?", mContext);
+
+        //super.onBackPressed();
+
+
+
+
+
+    }
+
 
 }

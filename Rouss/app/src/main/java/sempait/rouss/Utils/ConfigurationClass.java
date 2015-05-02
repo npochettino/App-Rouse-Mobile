@@ -10,7 +10,9 @@ public class ConfigurationClass {
 
 
     private static final String PREFS_NAME = "rouss_settings";
-    private static final String USER_NAME = "user_name";
+    private static final String USER_NAME_COMPLETED = "user_name_completed";
+    private static final String USER_FIRST_NAME = "user_first_name";
+    private static final String USER_LAST_NAME = "user_last_name";
     private static final String USER_EMAIL = "user_email";
     private static final String USER_COD = "codigo_user";
     private static final String CODIGO_SORTEO = "codigo_sorteo";
@@ -19,6 +21,10 @@ public class ConfigurationClass {
     private static final String CANTIDAD_PREMIOS_TOTALES = "cantidad_premios_totales";
     private static final String CODIGO_PREMIO = "codigo_premio";
     private static final String SONIDO_STATE = "sonido_state";
+    private static final String EMAIL_USER = "email_user";
+    private static final String PASSWORD_USER = "password_user";
+    private static final String TELEFONO_USER = "telefono_user";
+    private static final String DNI_USER = "dni_user";
 
 
     public static SharedPreferences sharedPref(Context context) {
@@ -26,12 +32,12 @@ public class ConfigurationClass {
     }
 
 
-    public static void setUserName(Context context, String userName) {
-        sharedPref(context).edit().putString(USER_NAME, userName).commit();
+    public static void setUserNameCompleted(Context context, String userName) {
+        sharedPref(context).edit().putString(USER_NAME_COMPLETED, userName).commit();
     }
 
-    public static String getUserName(Context context) {
-        return sharedPref(context).getString(USER_NAME, null);
+    public static String getUserNameCompleted(Context context) {
+        return sharedPref(context).getString(USER_NAME_COMPLETED, null);
     }
 
     public static void setUserCod(Context context, String userCod) {
@@ -103,5 +109,78 @@ public class ConfigurationClass {
     public static Boolean getSonidoState(Context context) {
         return sharedPref(context).getBoolean(SONIDO_STATE, false);
     }
+
+    public static void setEmailUser(Context mContext, String email) {
+
+
+        sharedPref(mContext).edit().putString(EMAIL_USER, email).commit();
+
+
+    }
+
+    public static String getEmalUser(Context context) {
+        return sharedPref(context).getString(EMAIL_USER, null);
+    }
+
+    public static void setTelUser(Context mContext, String telefono) {
+
+
+        sharedPref(mContext).edit().putString(TELEFONO_USER, telefono).commit();
+
+
+    }
+
+    public static String getTelUser(Context context) {
+        return sharedPref(context).getString(TELEFONO_USER, null);
+    }
+
+    public static void setDNIUser(Context mContext, String dni) {
+
+
+        sharedPref(mContext).edit().putString(DNI_USER, dni).commit();
+
+
+    }
+
+    public static String getDNIUser(Context context) {
+        return sharedPref(context).getString(DNI_USER, null);
+    }
+
+    public static void setPasswodUser(Context mContext, String password) {
+
+
+        sharedPref(mContext).edit().putString(PASSWORD_USER, password).commit();
+
+
+    }
+
+    public static String getPasswordUser(Context context) {
+        return sharedPref(context).getString(PASSWORD_USER, null);
+    }
+
+    public static void setFirstNameUser(Context mContext, String password) {
+
+
+        sharedPref(mContext).edit().putString(USER_FIRST_NAME, password).commit();
+
+
+    }
+
+    public static String getUserFirstNameUser(Context context) {
+        return sharedPref(context).getString(USER_FIRST_NAME, null);
+    }
+
+    public static void setUserLastNameUser(Context mContext, String password) {
+
+
+        sharedPref(mContext).edit().putString(USER_LAST_NAME, password).commit();
+
+
+    }
+
+    public static String getUserLastNameUserUser(Context context) {
+        return sharedPref(context).getString(USER_LAST_NAME, null);
+    }
+
 
 }

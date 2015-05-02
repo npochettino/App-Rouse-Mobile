@@ -3,7 +3,6 @@ package sempait.rouss.Fragment;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +22,12 @@ public class ResultFragment extends BaseFragment {
     private View mView;
     private ImageView mImgResult;
     private PutParticipanteTask mPutParticipanteTask;
-    private SoundPool soundPool;
     private int streamId;
+    private Boolean isLoser = false;
+    private Boolean loaded = false;
+    public SoundPool soundPool;
+    public int streamIdGanste;
+    public int streamIdSeraLaProxima;
 
 
     public static ResultFragment newInstance() {
@@ -39,11 +42,8 @@ public class ResultFragment extends BaseFragment {
 
         ((BaseActivity) mContext).getActionBar().setTitle("Gracias por participar");
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-        if (Integer.valueOf(ConfigurationClass.getcodigoPremio(mContext)) != 4)
-            streamId = soundPool.load(mContext, R.raw.aplausos, 0);
-
-        else
-            streamId = soundPool.load(mContext, R.raw.seralaproxima, 0);
+        streamIdGanste = soundPool.load(mContext, R.raw.aplausos, 0);
+        streamIdSeraLaProxima = soundPool.load(mContext, R.raw.seralaproxima, 0);
 
 
     }
@@ -59,12 +59,14 @@ public class ResultFragment extends BaseFragment {
         mImgResult.setImageResource(setImageResult());
 
         if (ConfigurationClass.getSonidoState(mContext))
-        setSound();
+            setSound();
 
         executePutParticipanteService();
 
 
         return mView;
+
+
     }
 
 
@@ -76,7 +78,7 @@ public class ResultFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                ((BaseActivity)mContext).onBackPressed();
+                ((BaseActivity) mContext).onBackPressed();
 
             }
         });
@@ -91,28 +93,28 @@ public class ResultFragment extends BaseFragment {
 
             case 1:
                 mIdImage = R.drawable.trago;
-
+                isLoser = false;
                 break;
             case 2:
                 mIdImage = R.drawable.descuento;
-
+                isLoser = false;
                 break;
             case 3:
                 mIdImage = R.drawable.espumante;
-
+                isLoser = false;
                 break;
             case 4:
                 mIdImage = R.drawable.seralaproxima;
-
+                isLoser = true;
 
                 break;
             case 5:
                 mIdImage = R.drawable.entrada;
-
+                isLoser = false;
                 break;
             case 6:
                 mIdImage = R.drawable.p2x1;
-
+                isLoser = false;
                 break;
 
 
@@ -142,19 +144,18 @@ public class ResultFragment extends BaseFragment {
             public void run() {
 
                 float y = 0;
+                if (isLoser)
+                    streamId = streamIdSeraLaProxima;
+                else
+                    streamId = streamIdGanste;
 
-
-                soundPool.play(streamId, 1, 1, 1, 0, 1f);
-                SystemClock.sleep(4000);
-                soundPool.autoPause();
-
-//                for (float x = 0; x <=switch en on of android?3000; ) {
-//                    y = y - 0.1f;
-//                    soundPool.setVolume(streamId, y, y);
-//                    SystemClock.sleep(1000);
-//
-//
-//                }
+                soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                    @Override
+                    public void onLoadComplete(SoundPool soundPool, int sampleId,
+                                               int status) {
+                        soundPool.play(streamId, 20, 20, 1, 0, 1f);
+                    }
+                });
 
 
             }

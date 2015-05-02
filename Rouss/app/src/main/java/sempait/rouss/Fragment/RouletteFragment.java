@@ -122,6 +122,8 @@ public class RouletteFragment extends BaseFragment {
 
         mRoulette.setEnabled(false);
         mImgRoulette.setEnabled(false);
+        mRoulette.setImageResource(R.drawable.ruletabloq);
+
     }
 
     @Override

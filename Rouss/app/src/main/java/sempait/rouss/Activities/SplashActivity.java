@@ -26,7 +26,7 @@ public class SplashActivity extends BaseInnerActivity {
 
         setContentView(R.layout.activity_splash);
 
-        if (ConfigurationClass.getUserName(getApplicationContext()) != null)
+        if (ConfigurationClass.getUserCod(getApplicationContext()) != null)
             executeSorteoService();
         else {
             SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginActivity.class));
