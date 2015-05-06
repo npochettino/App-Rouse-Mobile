@@ -10,7 +10,6 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import sempait.rouss.Base.BaseActivity;
-import sempait.rouss.Utils.ConfigurationClass;
 import sempait.rouss.Utils.DialogCatalog;
 
 /**
@@ -86,28 +85,6 @@ public class CreateAcountTask extends AsyncTask<Void, Void, String> {
         if (result != null) {
 
 
-            switch (Integer.valueOf(result)) {
-
-
-                case 1:
-                    if (ConfigurationClass.getUserNameCompleted(mContext) != null)
-                        DialogCatalog.mensajeError("Los datos fueron modificados con éxito", mContext);
-                    else {
-                        DialogCatalog.mensajeError("La cuenta fue creada con éxito", mContext);
-                        ((BaseActivity) mContext).onBackPressed();
-                    }
-                    break;
-
-                case 2:
-                    DialogCatalog.mensajeError("El DNI fue ya está en uso", mContext);
-                    break;
-
-                case 3:
-                    DialogCatalog.mensajeError("El email ya esta en uso", mContext);
-                    break;
-
-
-            }
         } else
 
             DialogCatalog.mensajeError("No pudo crearse la cuenta, intentelo nuevamente en unos minutos ", mContext);

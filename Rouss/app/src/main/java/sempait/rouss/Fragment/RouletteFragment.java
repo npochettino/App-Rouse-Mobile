@@ -63,11 +63,10 @@ public class RouletteFragment extends BaseFragment {
         mItemPremio = Integer.valueOf(ConfigurationClass.getcodigoPremio(mContext));
         ((BaseActivity) mContext).getActionBar().setTitle("Ruleta");
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        ((BaseActivity) mContext).getActionBar().setHomeButtonEnabled(true);
         streamId = soundPool.load(mContext, R.raw.ruleta, 0);
 
-
         setStateRouletteAndShowMsj();
-
 
         return mView;
     }
@@ -179,7 +178,7 @@ public class RouletteFragment extends BaseFragment {
 
                 mImgRoulette.setClickable(false);
                 firstAnimation.reset();
-
+                ((BaseActivity) mContext).getActionBar().setHomeButtonEnabled(false);
 
             }
 
@@ -188,7 +187,6 @@ public class RouletteFragment extends BaseFragment {
 
 
                 mImgRoulette.setClickable(true);
-
 
                 ((BaseActivity) mContext).replaceInnerFragmentFromBotton(ResultFragment.newInstance(), true);
 

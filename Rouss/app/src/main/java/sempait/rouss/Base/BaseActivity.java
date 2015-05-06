@@ -1,5 +1,7 @@
 package sempait.rouss.Base;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +17,9 @@ import sempait.rouss.R;
  * Created by martin on 18/03/15.
  */
 public class BaseActivity extends FragmentActivity {
+
+    Fragment mFragment;
+
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -64,11 +69,6 @@ public class BaseActivity extends FragmentActivity {
             }
     }
 
-    @Override
-    public void onBackPressed() {
-
-        backWithAnimation();
-    }
 
     protected void backWithAnimation() {
 
@@ -90,7 +90,7 @@ public class BaseActivity extends FragmentActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out, R.anim.push_right_out, R.anim.push_right_in);
         transaction.replace(R.id.container, fragment);
-
+        this.mFragment = mFragment;
         if (addToBackstack)
             transaction.addToBackStack(null);
         transaction.commit();
@@ -106,8 +106,6 @@ public class BaseActivity extends FragmentActivity {
             transaction.addToBackStack(null);
         transaction.commit();
     }
-
-
 
 
     public void replaceInnerFragmentFromBotton(Fragment fragment, Boolean addToBackstack) {
@@ -134,4 +132,46 @@ public class BaseActivity extends FragmentActivity {
         getActionBar().setTitle(title);
     }
 
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+                backWithAnimation();
+        } else {
+
+
+            new AlertDialog.Builder(this).setMessage("Desea salir de la aplicación?")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int id) {
+
+
+                                    finish();
+
+                                }
+
+                            }
+
+
+                    ).
+
+                    setNegativeButton("No",
+
+                            new DialogInterface.OnClickListener()
+
+                            {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }
+
+                    ).
+
+                    show();
+        }
+    }
 }

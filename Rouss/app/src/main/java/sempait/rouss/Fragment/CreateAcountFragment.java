@@ -1,12 +1,12 @@
 package sempait.rouss.Fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +36,7 @@ public class CreateAcountFragment extends BaseFragment {
     private RelativeLayout mBtnCancelar;
     private CreateAcountTask mCreateTask;
     private NavigationMenuDrawerFragment mInstace;
+    private CheckBox mCheckboxEdad;
 
 
     public static CreateAcountFragment newInstance(NavigationMenuDrawerFragment mInstanceDrawer) {
@@ -48,7 +49,7 @@ public class CreateAcountFragment extends BaseFragment {
 
 
     }
-
+    @SuppressLint("ValidFragment")
     public CreateAcountFragment(NavigationMenuDrawerFragment mInstanceDrawer) {
 
         mInstace = mInstanceDrawer;
@@ -69,10 +70,13 @@ public class CreateAcountFragment extends BaseFragment {
         mDniEditText = (EditText) mView.findViewById(R.id.et_dni);
         mBtnCrearCuenta = (TextView) mView.findViewById(R.id.btn_crear_cuenta);
         mBtnCancelar = (RelativeLayout) mView.findViewById(R.id.btn_relative_cancelar);
+        mCheckboxEdad = (CheckBox) mView.findViewById(R.id.cb_mayor18);
+
 
         if (ConfigurationClass.getUserNameCompleted(mContext) != null) {
             loadDataUser();
             mBtnCrearCuenta.setText("Modificar");
+            mCheckboxEdad.setVisibility(View.GONE);
         }
 
 
@@ -112,21 +116,27 @@ public class CreateAcountFragment extends BaseFragment {
 
                 if (allFildCompleted()) {
 
-                    if (mPasswordEditText.getText().toString().equals(mPasswordConfirmEditText.getText().toString()))
+                    if (mCheckboxEdad.isChecked()) {
 
-                        if (RoussUtils.validEmail(mEmailEditText.getText().toString()))
+                        if (mPasswordEditText.getText().toString().equals(mPasswordConfirmEditText.getText().toString()))
 
-                            executeServiceAccount();
+                            if (RoussUtils.validEmail(mEmailEditText.getText().toString()))
+
+                                executeServiceAccount();
+
+                            else
+                                DialogCatalog.mensajeError("Ingrese un correo válido, por favor", mContext);
 
                         else
-                            DialogCatalog.mensajeError("Ingrese un correo válido, por favor", mContext);
+                            DialogCatalog.mensajeError("Los campos de contraseña deben coincidir", mContext);
 
-                    else
-                        DialogCatalog.mensajeError("Los campos de contraseña deben coincidir", mContext);
 
+                    } else
+                        DialogCatalog.mensajeError("Debes ser mayor de 18 años para participar", mContext);
 
                 } else
                     DialogCatalog.mensajeError("Debe completar todos los datos del formulario", mContext);
+
 
             }
         });
@@ -142,16 +152,31 @@ public class CreateAcountFragment extends BaseFragment {
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
 
-                ConfigurationClass.setUserNameCompleted(mContext, mApellidoEditText.getText() + " " + mNombreEditText.getText());
-                ConfigurationClass.setFirstNameUser(mContext, mNombreEditText.getText().toString());
-                ConfigurationClass.setUserLastNameUser(mContext, mApellidoEditText.getText().toString());
-                ConfigurationClass.setEmailUser(mContext, mEmailEditText.getText().toString());
-                ConfigurationClass.setTelUser(mContext, mTelefonoEditText.getText().toString());
-                ConfigurationClass.setDNIUser(mContext, mDniEditText.getText().toString());
-                ConfigurationClass.setPasswodUser(mContext, mPasswordEditText.getText().toString());
 
-                if (mInstace != null)
-                    mInstace.setNameUser();
+                switch (Integer.valueOf(result)) {
+
+
+                    case 1:
+                        if (ConfigurationClass.getUserNameCompleted(mContext) != null) {
+                            setDataUser();
+                            DialogCatalog.mensajeError("Los datos fueron modificados con éxito", mContext);
+                        } else {
+                            setDataUser();
+                            DialogCatalog.mensajeError("La cuenta fue creada con éxito", mContext);
+                            ((BaseActivity) mContext).onBackPressed();
+                        }
+                        break;
+
+                    case 2:
+                        DialogCatalog.mensajeError("El DNI fue ya está en uso", mContext);
+                        break;
+
+                    case 3:
+                        DialogCatalog.mensajeError("El email ya esta en uso", mContext);
+                        break;
+
+
+                }
 
 
             }
@@ -193,17 +218,20 @@ public class CreateAcountFragment extends BaseFragment {
 
     }
 
-    @Override
-    public void onBackPressed() {
+
+    public void setDataUser() {
 
 
-//        if (((BaseActivity) mContext).getSupportFragmentManager().getBackStackEntryCount() == 0)
-//            DialogCatalog.mensajeError("Desea salir de la aplicación?", mContext);
+        ConfigurationClass.setUserNameCompleted(mContext, mApellidoEditText.getText() + " " + mNombreEditText.getText());
+        ConfigurationClass.setFirstNameUser(mContext, mNombreEditText.getText().toString());
+        ConfigurationClass.setUserLastNameUser(mContext, mApellidoEditText.getText().toString());
+        ConfigurationClass.setEmailUser(mContext, mEmailEditText.getText().toString());
+        ConfigurationClass.setTelUser(mContext, mTelefonoEditText.getText().toString());
+        ConfigurationClass.setDNIUser(mContext, mDniEditText.getText().toString());
+        ConfigurationClass.setPasswodUser(mContext, mPasswordEditText.getText().toString());
 
-        //super.onBackPressed();
-
-
-
+        if (mInstace != null)
+            mInstace.setNameUser();
 
 
     }

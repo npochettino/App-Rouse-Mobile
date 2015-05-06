@@ -44,6 +44,7 @@ public class ResultFragment extends BaseFragment {
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         streamIdGanste = soundPool.load(mContext, R.raw.aplausos, 0);
         streamIdSeraLaProxima = soundPool.load(mContext, R.raw.seralaproxima, 0);
+        ((BaseActivity) mContext).getActionBar().setHomeButtonEnabled(false);
 
 
     }

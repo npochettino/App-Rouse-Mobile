@@ -72,7 +72,12 @@ public class ForgotPasswordTask extends AsyncTask<Void, Void, String> {
         if (result != null) {
 
 
-            DialogCatalog.mensajeError("El correo fue enviado con éxito", mContext);
+            if (result.equalsIgnoreCase("Ok"))
+
+                DialogCatalog.mensajeError("El correo fue enviado con éxito", mContext);
+
+            else
+                DialogCatalog.mensajeError("El email no existe", mContext);
 
 
         } else

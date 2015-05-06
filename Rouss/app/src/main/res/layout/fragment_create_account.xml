@@ -186,6 +186,15 @@
             android:background="@color/black" />
 
 
+        <CheckBox
+            android:id="@+id/cb_mayor18"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Soy mayor de 18 años" />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

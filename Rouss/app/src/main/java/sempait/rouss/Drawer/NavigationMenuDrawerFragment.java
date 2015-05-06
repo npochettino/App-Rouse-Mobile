@@ -161,7 +161,6 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
         switch (section) {
 
             case JUGAR:
-
                 fragment = RouletteFragment.newInstance();
                 mSection = "Ruleta";
                 ((BaseActivity) mContext).replaceInnerFragmentWhitFLip(fragment, false);
@@ -170,8 +169,6 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
             case MI_PERFIL:
                 fragment = CreateAcountFragment.newInstance(this);
                 mSection = "Mi perfil";
-
-
                 ((BaseActivity) mContext).replaceInnerFragment(fragment, false);
                 break;
             default:
@@ -184,6 +181,8 @@ public class NavigationMenuDrawerFragment extends BaseDrawerFragment {
         ((BaseActivity) mContext).getActionBar().setTitle(mSection);
 
         refreshMenuVisual();
+
+
     }
 
     private void replaceFragmentSection(Fragment fragment) {

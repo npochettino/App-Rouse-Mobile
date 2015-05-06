@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import sempait.rouss.R;
 import sempait.rouss.Services.volley.Manager.ForgotPasswordTask;
+import sempait.rouss.Utils.DialogCatalog;
 
 /**
  * Created by martin on 25/04/15.
@@ -51,7 +52,14 @@ public class ForgotPasswordFragemnt extends BaseFragment {
         mButtonDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                executeForgotPasswordService();
+
+
+                if (!mEmailEditText.getText().toString().isEmpty())
+                    executeForgotPasswordService();
+                else
+                    DialogCatalog.mensajeError("Debe completar todos los datos del formulario", mContext);
+
+
             }
         });
 
