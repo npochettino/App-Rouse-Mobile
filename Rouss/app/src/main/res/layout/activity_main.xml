@@ -33,4 +33,5 @@
 
     <include layout="@layout/view_loading" />
 
+
 </RelativeLayout>

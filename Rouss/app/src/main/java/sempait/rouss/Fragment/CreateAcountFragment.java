@@ -28,6 +28,7 @@ public class CreateAcountFragment extends BaseFragment {
     private EditText mNombreEditText;
     private EditText mApellidoEditText;
     private EditText mEmailEditText;
+    private EditText mEmailConfirmEditText;
     private EditText mPasswordEditText;
     private EditText mPasswordConfirmEditText;
     private EditText mTelefonoEditText;
@@ -49,6 +50,7 @@ public class CreateAcountFragment extends BaseFragment {
 
 
     }
+
     @SuppressLint("ValidFragment")
     public CreateAcountFragment(NavigationMenuDrawerFragment mInstanceDrawer) {
 
@@ -64,19 +66,12 @@ public class CreateAcountFragment extends BaseFragment {
         mNombreEditText = (EditText) mView.findViewById(R.id.et_nombre);
         mApellidoEditText = (EditText) mView.findViewById(R.id.et_apellido);
         mEmailEditText = (EditText) mView.findViewById(R.id.et_email);
-        mPasswordEditText = (EditText) mView.findViewById(R.id.et_password);
-        mPasswordConfirmEditText = (EditText) mView.findViewById(R.id.et_password_confirm);
-        mTelefonoEditText = (EditText) mView.findViewById(R.id.et_telefono);
-        mDniEditText = (EditText) mView.findViewById(R.id.et_dni);
+        mEmailConfirmEditText = (EditText) mView.findViewById(R.id.et_email_confirm);
         mBtnCrearCuenta = (TextView) mView.findViewById(R.id.btn_crear_cuenta);
-        mBtnCancelar = (RelativeLayout) mView.findViewById(R.id.btn_relative_cancelar);
-        mCheckboxEdad = (CheckBox) mView.findViewById(R.id.cb_mayor18);
 
 
         if (ConfigurationClass.getUserNameCompleted(mContext) != null) {
             loadDataUser();
-            mBtnCrearCuenta.setText("Modificar");
-            mCheckboxEdad.setVisibility(View.GONE);
         }
 
 
@@ -88,10 +83,7 @@ public class CreateAcountFragment extends BaseFragment {
         mNombreEditText.setText(ConfigurationClass.getUserFirstNameUser(mContext));
         mApellidoEditText.setText(ConfigurationClass.getUserLastNameUserUser(mContext));
         mEmailEditText.setText(ConfigurationClass.getEmalUser(mContext));
-        mPasswordEditText.setText(ConfigurationClass.getPasswordUser(mContext));
-        mPasswordConfirmEditText.setText(ConfigurationClass.getPasswordUser(mContext));
-        mTelefonoEditText.setText(ConfigurationClass.getTelUser(mContext));
-        mDniEditText.setText(ConfigurationClass.getDNIUser(mContext));
+        mEmailConfirmEditText.setText(ConfigurationClass.getEmalUser(mContext));
 
 
     }
@@ -102,37 +94,24 @@ public class CreateAcountFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        mBtnCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((BaseActivity) mContext).onBackPressed();
-            }
-        });
-
-
         mBtnCrearCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (allFildCompleted()) {
 
-                    if (mCheckboxEdad.isChecked()) {
+                    if (RoussUtils.validEmail(mEmailEditText.getText().toString()))
 
-                        if (mPasswordEditText.getText().toString().equals(mPasswordConfirmEditText.getText().toString()))
+                        if (mEmailEditText.getText().toString().equals(mEmailConfirmEditText.getText().toString()))
 
-                            if (RoussUtils.validEmail(mEmailEditText.getText().toString()))
-
-                                executeServiceAccount();
-
-                            else
-                                DialogCatalog.mensajeError("Ingrese un correo válido, por favor", mContext);
+                            ((BaseActivity) mContext).replaceInnerFragmentWhitFLip(new CreateAccount2Fragment(mNombreEditText.getText().toString(), mApellidoEditText.getText().toString(), mEmailEditText.getText().toString(),mInstace), true);
 
                         else
-                            DialogCatalog.mensajeError("Los campos de contraseña deben coincidir", mContext);
+                            DialogCatalog.mensajeError("Los correos deben coincidir", mContext);
 
+                    else
+                        DialogCatalog.mensajeError("Ingrese un correo válido, por favor", mContext);
 
-                    } else
-                        DialogCatalog.mensajeError("Debes ser mayor de 18 años para participar", mContext);
 
                 } else
                     DialogCatalog.mensajeError("Debe completar todos los datos del formulario", mContext);
@@ -144,70 +123,13 @@ public class CreateAcountFragment extends BaseFragment {
 
     }
 
-    private void executeServiceAccount() {
-        mCreateTask = new CreateAcountTask(mContext) {
-
-
-            @Override
-            protected void onPostExecute(String result) {
-                super.onPostExecute(result);
-
-
-                switch (Integer.valueOf(result)) {
-
-
-                    case 1:
-                        if (ConfigurationClass.getUserNameCompleted(mContext) != null) {
-                            setDataUser();
-                            DialogCatalog.mensajeError("Los datos fueron modificados con éxito", mContext);
-                        } else {
-                            setDataUser();
-                            DialogCatalog.mensajeError("La cuenta fue creada con éxito", mContext);
-                            ((BaseActivity) mContext).onBackPressed();
-                        }
-                        break;
-
-                    case 2:
-                        DialogCatalog.mensajeError("El DNI fue ya está en uso", mContext);
-                        break;
-
-                    case 3:
-                        DialogCatalog.mensajeError("El email ya esta en uso", mContext);
-                        break;
-
-
-                }
-
-
-            }
-
-
-        };
-
-        if (ConfigurationClass.getUserNameCompleted(mContext) != null)
-            mCreateTask.mCodigoUsuario = ConfigurationClass.getUserCod(mContext);
-        else
-            mCreateTask.mCodigoUsuario = "0";
-        mCreateTask.mApellido = mApellidoEditText.getText().toString();
-        mCreateTask.mNombre = mNombreEditText.getText().toString();
-        mCreateTask.mEmail = mEmailEditText.getText().toString();
-        mCreateTask.mTelefono = mTelefonoEditText.getText().toString();
-        mCreateTask.mPassword = mPasswordEditText.getText().toString();
-        mCreateTask.mDni = mDniEditText.getText().toString();
-
-        mCreateTask.execute();
-
-    }
 
     private boolean allFildCompleted() {
 
         if (mNombreEditText.getText().toString().isEmpty()
                 || mApellidoEditText.getText().toString().isEmpty()
                 || mEmailEditText.getText().toString().isEmpty()
-                || mPasswordEditText.getText().toString().isEmpty()
-                || mPasswordConfirmEditText.getText().toString().isEmpty()
-                || mTelefonoEditText.getText().toString().isEmpty()
-                || mDniEditText.getText().toString().isEmpty()) {
+                || mEmailConfirmEditText.getText().toString().isEmpty()) {
 
 
             return false;

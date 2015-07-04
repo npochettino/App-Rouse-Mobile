@@ -1,5 +1,6 @@
 package sempait.rouss.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +20,7 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationMenuDrawerFragment mNavigationMenuDrawerFragment;
     private Boolean firstRun = true;
+    private Context mContext;
 
 
     @Override
@@ -26,6 +28,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpActionBarsAndDrawers();
+        this.mContext = this;
+
     }
 
     private void setUpActionBarsAndDrawers() {
@@ -73,7 +77,12 @@ public class MainActivity extends BaseActivity {
         }
 
 
+
+
+
     }
+
+
 
 
     @Override

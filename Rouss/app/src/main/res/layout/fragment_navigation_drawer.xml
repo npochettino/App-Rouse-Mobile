@@ -76,6 +76,7 @@
             android:layout_height="0dp"
             android:text="Sonido"
             android:height="0dp"
+            android:checked="true"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:textColor="@color/white" />

@@ -107,7 +107,7 @@ public class ConfigurationClass {
     }
 
     public static Boolean getSonidoState(Context context) {
-        return sharedPref(context).getBoolean(SONIDO_STATE, false);
+        return sharedPref(context).getBoolean(SONIDO_STATE, true);
     }
 
     public static void setEmailUser(Context mContext, String email) {

@@ -21,7 +21,10 @@
 
     <!-- LOGIN -->
     <string name="email_hint">Email *</string>
+    <string name="email_confrim_hint">Email confirm *</string>
     <string name="password_hint">Password *</string>
+    <string name="password_confirm_hint">Password confirm *</string>
+
     <string name="forgot_password">Olvide mi contraseña?</string>
     <string name="done">Ingresar</string>
     <string name="skip">Skip</string>
@@ -30,7 +33,6 @@
     <string name="dni">DNI</string>
     <string name="telefono">Telefono</string>
     <string name="enviar">Enviar</string>
-
 
 
     <!-- REQUEST_ACOUTN -->

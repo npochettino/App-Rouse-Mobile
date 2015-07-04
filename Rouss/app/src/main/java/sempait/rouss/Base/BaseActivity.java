@@ -10,6 +10,18 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import java.io.File;
+
 import sempait.rouss.R;
 
 
@@ -19,6 +31,7 @@ import sempait.rouss.R;
 public class BaseActivity extends FragmentActivity {
 
     Fragment mFragment;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
 
 
     @Override
@@ -27,6 +40,7 @@ public class BaseActivity extends FragmentActivity {
         super.onCreate(bundle);
 
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        intializeImageLoader();
 
 //        TextView title = (TextView) findViewById(getResources().getIdentifier("action_bar_title", "id", "android"));
 //        if (title != null)
@@ -173,5 +187,20 @@ public class BaseActivity extends FragmentActivity {
 
                     show();
         }
+    }
+
+    private void intializeImageLoader() {
+
+        File cacheDir = StorageUtils.getCacheDirectory(getApplicationContext());
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).memoryCacheExtraOptions(480, 800)
+                .diskCacheExtraOptions(480, 800, null).threadPoolSize(3).threadPriority(Thread.NORM_PRIORITY - 2)
+                .tasksProcessingOrder(QueueProcessingType.FIFO).denyCacheImageMultipleSizesInMemory()
+                .memoryCache(new LruMemoryCache(2 * 1024 * 1024)).memoryCacheSize(2 * 1024 * 1024).memoryCacheSizePercentage(13)
+                .diskCache(new UnlimitedDiscCache(cacheDir)).diskCacheSize(50 * 1024 * 1024).diskCacheFileCount(100)
+                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator()).imageDownloader(new BaseImageDownloader(getApplicationContext()))
+                .defaultDisplayImageOptions(DisplayImageOptions.createSimple()).writeDebugLogs().build();
+
+        ImageLoader.getInstance().init(config);
+
     }
 }
